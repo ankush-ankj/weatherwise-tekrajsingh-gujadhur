@@ -1,0 +1,38 @@
+Me: "Risk of frost tonight?"
+AI:  Low temp: 2°C - slight frost possible, protect sensitive plants
+
+
+Me: "More humid than yesterday?"
+AI:  Current humidity: 70% vs yesterday's 65% - 5% increase
+
+
+Me: "All-day rain expected?"
+AI:  Forecast shows consistent 4mm precipitation throughout the day
+
+
+Me: "Dangerous wind speeds?"
+AI:  Current winds: 48 km/h - secure outdoor objects
+
+
+Me: "Feels hotter than actual temp?"
+AI:  32°C with 80% humidity - feels like 38°C
+
+
+Me: "Water my lawn today?"
+AI:  24h precipitation: 1mm - supplemental watering recommended
+
+
+Me: "Outdoor wedding weather Friday?"
+AI:  Friday forecast: 22°C, 0mm rain, 10 km/h winds - ideal conditions
+
+
+Me: "Beach erosion risk?"
+AI:  Sustained 35 km/h offshore winds - moderate erosion potential
+
+
+Me: "Big temp drop coming?"
+AI:  24h change: 18°C → 6°C (-12°C) - layer clothing
+
+
+Me: "Does humidity affect pollution?"
+AI:  Current humidity: 90% - may trap particulate matter
