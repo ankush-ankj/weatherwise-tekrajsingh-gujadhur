@@ -1,0 +1,29 @@
+Me: (Current Weather)
+AI: "Current in Tokyo: 28°C, 60% humidity, 15 km/h winds"
+
+Me: Select "1. Set Location"
+Input: "Tokyo"
+AI: Weather data loaded for Tokyo
+
+Me: Pick "4. View Forecast"
+AI: 5-Day Forecast: 2023-11-01: 30°C/22°C, 0mm 2023-11-02:  28°C/20°C, 2mm ...(full table)...
+
+Me: Ask "Will tomorrow be hotter than today?"
+AI: Tomorrow's max: 28°C vs Today's 30°C - slightly cooler
+
+Me: Type "Should I carry an umbrella now?"
+AI: Current precipitation: 0mm. No rain expected today
+
+Me: Ask "Weekend weather forecast?"
+AI:  Saturday: 26°C/18°C, 1mm rain | Sunday: 24°C/16°C, clear
+
+Me: Ask "Is it warmer than yesterday?"
+AI: Today: 28°C vs Yesterday's 25°C - warmer
+
+Me: Select "5. Visualizations" → "Both"
+AI: Shows temp trend graph and precipitation bars
+
+
+Me: Try "Compare Osaka weather"
+AI:  Single location support only
+
