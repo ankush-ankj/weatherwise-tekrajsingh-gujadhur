@@ -1,0 +1,21 @@
+Me: "When's sunset?"
+AI:  Sunset data unavailable in current feed
+
+Me: Set invalid "XYZ City"
+AI:  Could not fetch weather data
+
+Me: 6 → Exit → Relaunch
+AI:  Welcome back!
+
+Me: Set "Sahara Desert"
+AI:  Current: 45°C, 5% humidity, 0mm rain
+
+Me: Visualize rain forecast
+AI:  Bar chart showing 0mm, 2mm, 5mm...
+
+Me: "Temperature trend next days?"
+AI:  Gradual cooling: 28°C → 24°C over 5 days
+
+Me: Choose "6. Exit"
+AI: Thank you for using Weather Advisor!
+
