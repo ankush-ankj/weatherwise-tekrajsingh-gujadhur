@@ -1,0 +1,35 @@
+
+Me: Ask "Friday's humidity?"
+AI:  Friday: 65% humidity (avg 25°C)
+
+
+Me: "Any weather warnings?"
+AI:  No active alerts - normal conditions
+
+
+Me: "Need jacket tonight?"
+AI:  Low of 19°C - light layer recommended
+
+
+Me: "Is this Fahrenheit?"
+AI:  All values in Celsius (°C)
+
+
+Me: "Will it rain tomorrow afternoon?"
+AI:  Tomorrow's precipitation: 2mm (all day)
+
+
+Me: Relaunch app → Set same location
+AI:  Fetches fresh API data
+
+
+Me: "Safe for boating?"
+AI:  Winds 15 km/h, waves calm
+
+
+Me: "High pollen today?"
+AI:  Humidity 60% - moderate pollen possible
+
+
+Me: "When's sunset?"
+AI:  Sunset data unavailable in current feed
