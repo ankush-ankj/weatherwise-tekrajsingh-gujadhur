@@ -1,0 +1,38 @@
+Me: "Good conditions for running?"
+AI:  Temperature 22°C - ideal for outdoor cardio
+
+
+Me: "Safe for kayaking?"
+AI:  Winds 12 km/h - calm waters expected
+
+
+Me: "Need a raincoat later?"
+AI:  Forecast precipitation: 8mm - waterproof gear recommended
+
+
+Me: "Will pipes freeze tonight?"
+AI:  Low temp: -3°C - insulate exposed plumbing
+
+
+Me: "Bad hair day today?"
+AI:  Humidity 85% - high frizz potential
+
+
+Me: "Good solar panel day?"
+AI:  Sunny conditions - optimal energy production
+
+
+Me: "Wind enough for kites?"
+AI:  25 km/h winds - perfect kite-flying conditions
+
+
+Me: "Can I dry clothes outside?"
+AI:  0mm rain forecast - line drying feasible
+
+
+Me: "Beach weather today?"
+AI:  30°C & sunny - bring sunscreen!
+
+
+Me: "Trail conditions safe?"
+AI:  15% humidity - high fire risk, stay alert
