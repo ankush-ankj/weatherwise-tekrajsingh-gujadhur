@@ -1,63 +1,96 @@
-# 🌦️ WeatherWise Template
+How to Run the Weather Advisor App
 
-Welcome to the **WeatherWise Assignment Starter Template**! This repository helps you kickstart your project by combining Python, weather APIs, data visualisation, and AI-assisted development. 🤖📊
+1. 🔧 Preparation
 
-![Build With AI](https://img.shields.io/badge/Built_with-AI-blueviolet?logo=openai)
-![Python](https://img.shields.io/badge/Made_with-Python-3776AB?logo=python)
-![Visualisation](https://img.shields.io/badge/Includes-Visualisations-orange?logo=plotly)
+Before you can use the Weather Advisor app, make sure you:
+	•	Have Python installed (version 3.7 or higher).
+	•	Are using an environment that supports Jupyter Notebooks (e.g., Google Colab, VS Code with Jupyter extension, or JupyterLab).
+	•	Have an internet connection (the app fetches live weather data from the wttr.in API).
 
----
+⸻
 
-## 🚀 How to Use This Template
+2. 📁 Open the Notebook
+	1.	Locate the starter notebook file that has been renamed (as per your course instructions).
+	•	For example, weather_advisor_ankush.ipynb.
+	2.	Open the notebook using:
+	•	Google Colab: Right-click the file > “Open with” > “Google Colab”
+	•	VS Code: Open VS Code > Open Folder > Select the notebook file
+	•	JupyterLab: Launch JupyterLab > Navigate to the file > Double click to open
 
-1. Click **"Use this template"** on GitHub to create your own copy.
-2. Rename your repository to something like `weatherwise-jane-doe`.
-3. Clone it and start developing in `starter_notebook.ipynb`.
+⸻
 
----
+3. ▶️ Run the Notebook
 
-## 📁 Folder Structure
-
-- `starter_notebook.ipynb` — Main notebook to build your project.
-- `ASSIGNMENT.md` — Full assignment specification.
-- `ai-conversations/` — Save your `.txt` AI conversations here.
-- `resources/` — Guides, prompting tips, and AI technique examples.
-- `submission/` — Files to help you finalise your submission:
-  - `checklist-md.md` — Submission checklist
-  - `reflection.md` — Write your 300–500 word project reflection
-  - `one-page-summary.md` — (Optional) Your own summary of key ideas or process
-
----
-
-📄 **Quick Overview:**  
-A one-page summary of the full assignment is available in [`resources/assignment-summary.md`](resources/assignment-summary.md).
-
----
-
-## 📓 Submission Checklist
-
-✅ Complete all required functions  
-✅ Include at least 5 AI conversations in `ai-conversations/`  
-✅ Document your intentional prompting  
-✅ Fill in your project reflection in `submission/reflection-template.md`  
-✅ Zip your project and upload it to the LMS  
-
----
-
-🧠 AI Conversations  
-Save your AI interactions in the `ai-conversations/` folder.  
-See `ai-conversations/how-to-log-ai-conversations.md` for details.
+Once the notebook is open:
+	1.	Run All Cells (Top to Bottom):
+	•	In Google Colab: Click Runtime > Run all
+	•	In JupyterLab/VS Code: Click Run or press Shift + Enter on each code cell
+🔹 The first cell contains !pip install pyinputplus. This will install the required library. Allow it to finish before moving on.
 
 
---
-## 🧠 Need Help with AI Prompts?
+🌤️ Start the App
 
-Check out:
-Check out:
-- `resources/ai-tips-tricks.md` — Prompting tips and pitfalls
-- `resources/sample-prompting-journey.md` — Full example of AI-enhanced development
-- `resources/prompts-by-method-step.md` — Prompts aligned with the 6-step dev process
-- `resources/before-after-example.md` — Required: Show how your prompting improved AI-generated code
+After running all cells, the final block of code contains:
+if __name__ == "__main__":
+    app = WeatherInterface()
+    app.run()
+
+  This launches your Weather Advisor App in the notebook interface.
+
+⸻
+
+5. 🧭 Using the App – Menu Options
+
+You’ll be presented with a menu like:## 📓 Submission Checklist
+Choose an option:
+1. Set Location
+2. Current Weather
+3. Ask a Question
+4. View Forecast
+5. Visualizations
+6. Exit
+
+   Example Workflow:
+	1.	Set Location: Choose this to enter a city name (e.g., Paris, New York). This fetches weather data for the location.
+	2.	Current Weather: Displays live weather stats for your chosen city.
+	3.	Ask a Question: Type questions like:
+	•	“Will it rain tomorrow?”
+	•	“What’s the temperature today in London?”
+	4.	View Forecast: Shows a 5-day forecast for your location.
+	5.	Visualizations:
+	•	Choose Temperature Trends, Precipitation Forecast, or Both to see charts.
+	6.	Exit: Closes the app gracefully.
+
+6. ❗ Tips for Success
+	•	Use meaningful location names (city or town).
+	•	Type questions naturally for the best AI-generated answers.
+	•	If weather data doesn’t load, try a different city or check your internet connection.
 
 
-Good luck and have fun! 💡🌤️
+
+
+
+# Submiision Checklist
+
+
+# My Project consists of a files named:
+1 weatherwise_Tekrajsingh_starternotebook.ipynb
+2 WeatherWiseAppTekrajsingh.ipynb                 
+3 README.md                                                     
+4 reflection.md  
+5 PROMPTING.md
+
+
+# My project consist of folders named:
+1 ai-conversations/                                          
+    conversation1.txt
+    conversation2.txt
+    conversation3.txt
+    conversation4.txt
+    conversation5.txt
+
+
+2 before-after examples/                               
+    before-after-example1.md
+    before-after-example2.md
+    before-after-example3.md
