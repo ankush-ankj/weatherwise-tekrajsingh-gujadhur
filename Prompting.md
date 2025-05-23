@@ -117,8 +117,7 @@ This response represents what a typical user might expect and request when engag
 
 This prompt helps uncover the real-world, pre-AI behaviors of users—useful for understanding what tasks your app can automate or enhance.
 
-###🤖  AI Respons
-e (from a user perspective):
+🤖 AI Response (from a user perspective):
 
 "Without a weather assistant, I’d usually:
 
@@ -137,70 +136,54 @@ This gives insight into what people value (quick access, visual data, reliabilit
 Would you like to turn this into a user scenario or map it to app features?
 ###
 
+### Step 4: Request Pseudocode
+
+pseudocode prompt
+"Write a pseudocode algorithm for how a weather assistant should process a user's natural language question, retrieve the forecast, and generate a helpful response."
+
+### AI Respons
+START
+
+DISPLAY welcome message
+
+WHILE user has not exited:
+    DISPLAY menu options:
+        - Set location
+        - Ask a question
+        - View forecast
+        - Exit
+
+    IF user selects "Set location":
+        PROMPT for location
+        FETCH weather data from API
+        STORE weather data
+
+    IF user selects "Ask a question":
+        PROMPT user for natural language input
+        PARSE input to identify:
+            - Location (if specified)
+            - Time (today, tomorrow, weekend)
+            - Attribute (temperature, rain, wind, etc.)
+        IF location not provided:
+            USE current stored location
+        SELECT current or forecast data based on time
+        EXTRACT requested attribute from data
+        FORMAT a friendly natural language response
+        DISPLAY the response
+
+    IF user selects "View forecast":
+        DISPLAY 5-day forecast from stored weather data
+
+    IF user selects "Exit":
+        DISPLAY goodbye message
+        END program
+
+END WHILE
+
+END
 
 
 
-
-### 🤖 AI Response
-```python
-# Main program structure
-function main():
-    display_welcome()
-    location = get_location_from_user()
-    units = get_preferred_units()
-    
-    while True:
-        weather_data = fetch_weather_data(location, units)
-        display_dashboard(weather_data)
-        choice = display_menu()
-        
-        if choice == "forecast":
-            display_detailed_forecast(weather_data)
-        else if choice == "graph":
-            display_temperature_graph(weather_data)
-        else if choice == "location":
-            location = get_location_from_user()
-        else if choice == "refresh":
-            continue  # Will loop back and refresh data
-        else if choice == "exit":
-            break
-
-# Data functions
-function fetch_weather_data(location, units):
-    # Use provided weather module to get data
-    current_weather = weather_module.get_current(location, units)
-    forecast = weather_module.get_forecast(location, units)
-    return {current: current_weather, forecast: forecast}
-
-# Display functions
-function display_dashboard(weather_data):
-    clear_screen()
-    display_current_conditions(weather_data["current"])
-    display_simple_forecast(weather_data["forecast"])
-
-function display_detailed_forecast(weather_data):
-    clear_screen()
-    for day in weather_data["forecast"]:
-        display_day_forecast(day)
-    wait_for_user()
-
-function display_temperature_graph(weather_data):
-    clear_screen()
-    temperatures = extract_temperatures(weather_data["forecast"])
-    dates = extract_dates(weather_data["forecast"])
-    create_line_graph(dates, temperatures)
-    wait_for_user()
-
-# User interaction functions
-function display_menu():
-    print menu options
-    return get_valid_choice()
-
-function get_location_from_user():
-    prompt for location
-    validate location
-    return location
-```
 
 ### 🗣️ Follow-up Prompt (Challenge)
 ```
@@ -213,12 +196,17 @@ The pseudocode looks good overall. I noticed that error handling isn't explicitl
 Also, how would you structure the functions to make testing easier?
 ```
 
-## Step 5: Convert to Python Code
+
+
+
+
+
+
+### Step 5: Convert to Python Code
 
 ### 🗣️ Initial Implementation Prompt
 ```
-Let's start converting this to Python code. First, could you implement the main() function and the user interaction functions? Assume the weather module is imported as 'weather_api' and has functions:
-
+“Write Python code to implement a simple weather assistant that takes a user’s location and displays the current temperature using the wttr.in API.”
 - weather_api.get_current(location, units) - returns current weather
 - weather_api.get_forecast(location, units, days=3) - returns forecast
 
@@ -227,125 +215,46 @@ I'll be using pyinputplus for user input validation and matplotlib for any visua
 
 ### 🤖 AI Response (partial code)
 ```python
-import pyinputplus as pyip
-import matplotlib.pyplot as plt
-import weather_api
-import os
-import time
 
-def main():
-    """Main function to run the weather dashboard."""
-    display_welcome()
-    location = get_location_from_user()
-    units = get_preferred_units()
-    
-    while True:
-        try:
-            weather_data = fetch_weather_data(location, units)
-            display_dashboard(weather_data)
-            choice = display_menu()
-            
-            if choice == "forecast":
-                display_detailed_forecast(weather_data)
-            elif choice == "graph":
-                display_temperature_graph(weather_data)
-            elif choice == "location":
-                location = get_location_from_user()
-            elif choice == "refresh":
-                continue  # Will loop back and refresh data
-            elif choice == "exit":
-                print("Thank you for using the Weather Dashboard!")
-                break
-        except ConnectionError:
-            print("Unable to connect to weather service. Please check your internet connection.")
-            time.sleep(2)
-        except Exception as e:
-            print(f"An error occurred: {e}")
-            time.sleep(2)
+import requests
 
-def display_welcome():
-    """Display welcome message."""
-    clear_screen()
-    print("=" * 60)
-    print("               WEATHER DASHBOARD")
-    print("=" * 60)
-    print("\nWelcome to the Weather Dashboard!")
-    print("This application provides current weather and forecasts.")
-    print("\nPress Enter to continue...")
-    input()
+def get_current_temperature(location):
+    url = f"https://wttr.in/{location}?format=j1"
+    try:
+        response = requests.get(url)
+        data = response.json()
+        current_temp = data["current_condition"][0]["temp_C"]
+        print(f"The current temperature in {location} is {current_temp}°C.")
+    except Exception as e:
+        print("Could not fetch weather data:", e)
 
-def get_location_from_user():
-    """Get and validate location from user."""
-    while True:
-        clear_screen()
-        print("Location Entry")
-        print("-" * 60)
-        try:
-            location = pyip.inputStr("Enter city name (e.g., 'New York'): ")
-            # Here we would typically validate the location by making a test API call
-            # For now, we'll just check if it's not empty
-            if location.strip():
-                return location
-            print("Please enter a valid location.")
-        except KeyboardInterrupt:
-            print("\nOperation cancelled.")
-            exit()
+# Example usage
+location = input("Enter a location: ")
+get_current_temperature(location)
 
-def get_preferred_units():
-    """Get user's preferred temperature units."""
-    clear_screen()
-    print("Temperature Units")
-    print("-" * 60)
-    units_choice = pyip.inputMenu(["Celsius", "Fahrenheit"], 
-                                 numbered=True,
-                                 prompt="Select your preferred temperature units:\n")
-    return "metric" if units_choice == "Celsius" else "imperial"
 
-def display_menu():
-    """Display and handle main menu."""
-    options = ["View detailed forecast", 
-               "View temperature graph",
-               "Change location",
-               "Refresh data",
-               "Exit"]
-    
-    choice = pyip.inputMenu(options, 
-                          numbered=True,
-                          prompt="\nWhat would you like to do?\n")
-    
-    # Convert menu choice to internal command
-    if choice == "View detailed forecast":
-        return "forecast"
-    elif choice == "View temperature graph":
-        return "graph"
-    elif choice == "Change location":
-        return "location"
-    elif choice == "Refresh data":
-        return "refresh"
-    else:
-        return "exit"
 
-def clear_screen():
-    """Clear the terminal screen."""
-    os.system('cls' if os.name == 'nt' else 'clear')
 
-def wait_for_user():
-    """Wait for user to press Enter to continue."""
-    print("\nPress Enter to return to the main menu...")
-    input()
+
+
+
 ```
 
 ### 🗣️ Refinement Prompt
 
-```
-This looks good as a starting point. Now I need to implement the data functions and display functions. Can you help me implement:
+```“Improve the existing Python weather assistant by adding natural language question parsing, support for multiple weather attributes (like temperature, rain, and wind), and a simple user interaction loop with a menu.”
 
-1. fetch_weather_data()
-2. display_dashboard()
-3. display_detailed_forecast()
-4. display_temperature_graph()
+This refinement prompt helps expand your basic implementation into a more functional assistant. It leads to enhancements like:
 
-For the graph, I want to show a line graph of temperatures (high/low) for the forecast days. Please add appropriate error handling for API connection issues.
+Adding a WeatherParser class to interpret user questions
+
+Handling different forecast time frames (today, tomorrow, weekend)
+
+Supporting weather attributes beyond just temperature
+
+Including a loop to interact with the user multiple times
+
+Displaying structured responses and visualizations
 ```
 
 ### 🤖 AI Response (partial code)
@@ -417,189 +326,140 @@ def display_dashboard(weather_data):
 
 ### 🗣️ Integration Prompt
 ```
-I need to complete the remaining display functions and integrate everything. Could you provide the code for:
+“Combine the weather data retrieval, natural language question parsing, and user interface into a single cohesive Python application that allows users to interact with the assistant, ask weather-related questions, and receive structured answers.”
 
-1. display_detailed_forecast()
-2. display_temperature_graph()
+This prompt guides the system to merge components (fetching, parsing, responding) into a unified experience. It enables:
 
-Also, I'm not seeing where the error handling for invalid locations is implemented. Could you improve the get_location_from_user() function to attempt validation through the weather API before accepting the input?
-```
+Seamless flow from user input → interpretation → data retrieval → output
+
+Reuse of classes like WeatherFetcher, WeatherParser, and WeatherInterface
+
+A central run() method to control the app lifecycle
+
+Real-time, conversational-style interaction
+
+
+...
 
 ## Step 6: Test with Data
 
 ### 🗣️ Testing Prompt
 ```
-Now I want to test this code with some sample data. Can you provide a sample data structure that would be returned by:
-
-1. weather_api.get_current()
-2. weather_api.get_forecast()
-
-Also, what test cases should I consider to ensure my dashboard handles all possible scenarios correctly?
-```
+“Write test cases to verify that the weather assistant correctly parses user questions, fetches data from the API, and generates accurate responses for different time periods and weather attributes.”```
 
 ### 🤖 AI Response (partial)
-> Here are sample data structures that might be returned by the weather API:
->
-> ```python
-> # Sample current weather data
-> sample_current = {
->     'location': 'New York',
->     'timestamp': '2023-09-15 14:30',
->     'temperature': 22,
->     'feels_like': 24,
->     'condition': 'Partly Cloudy',
->     'humidity': 65,
->     'wind_speed': 8,
->     'wind_direction': 'NE',
->     'pressure': 1012,
->     'visibility': 10,
->     'uv_index': 5,
->     'units': 'metric'
-> }
->
-> # Sample forecast data (list of days)
-> sample_forecast = [
->     {
->         'date': '2023-09-15',
->         'day_of_week': 'Friday',
->         'high': 24,
->         'low': 18,
->         'condition': 'Partly Cloudy',
->         'precipitation_chance': 20,
->         'humidity': 65,
->         'wind_speed': 8,
->         'wind_direction': 'NE',
->         'units': 'metric'
->     },
->     # Additional days would follow...
-> ]
-> ```
->
-> Test cases to consider:
->
-> 1. **Happy path**:
->    - Valid location with complete weather data
->    - Multiple days of forecast
->
-> 2. **Data issues**:
->    - Missing fields in current weather
->    - Partial forecast data available
->    - Empty forecast list
->
-> 3. **Connection issues**:
->    - API timeout
->    - Service unavailable
->
-> 4. **User input scenarios**:
->    - Invalid location name
->    - Empty input
->    - Special characters in location name
->
-> 5. **Display edge cases**:
->    - Very long location names
->    - Extreme temperature values
->    - Very long condition descriptions
+import unittest
+from unittest.mock import patch
+
+class TestWeatherParser(unittest.TestCase):
+
+    def setUp(self):
+        self.parser = WeatherParser()
+
+    def test_extract_location(self):
+        question = "Will it rain tomorrow in London?"
+        parsed = self.parser.parse_question(question)
+        self.assertEqual(parsed["location"], "london")
+
+    def test_extract_time_period(self):
+        question = "What’s the temperature this weekend?"
+        parsed = self.parser.parse_question(question)
+        self.assertEqual(parsed["time"], "weekend")
+
+    def test_extract_attribute(self):
+        question = "Is it windy today?"
+        parsed = self.parser.parse_question(question)
+        self.assertEqual(parsed["attribute"], "wind")
+
+class TestWeatherInterfaceResponse(unittest.TestCase):
+
+    def setUp(self):
+        self.interface = WeatherInterface()
+        # Mock weather data for tests
+        self.interface.weather_data = {
+            "current": {
+                "temp_C": "15",
+                "weatherDesc": "Sunny",
+                "precipMM": "0",
+                "humidity": "40",
+                "windspeedKmph": "10"
+            },
+            "forecast": [
+                {
+                    "date": "2025-05-24",
+                    "maxtempC": "20",
+                    "mintempC": "10",
+                    "avgtempC": "15",
+                    "precipMM": "0",
+                    "weatherDesc": "Partly cloudy"
+                }
+            ]
+        }
+        self.interface.current_location = "London"
+
+    def test_generate_temperature_response_today(self):
+        parsed = {"location": "London", "time": "today", "attribute": "temperature"}
+        response = self.interface._generate_response(parsed)
+        self.assertIn("15°C", response)
+
+    def test_generate_precipitation_response_no_rain(self):
+        parsed = {"location": "London", "time": "today", "attribute": "precipitation"}
+        response = self.interface._generate_response(parsed)
+        self.assertIn("No precipitation expected", response)
+
+if __name__ == "__main__":
+    unittest.main()
+
+
 
 ### 🗣️ Edge Case Prompt
 ```
-I'd like to specifically focus on handling the case where the weather service returns incomplete data. Could you show me how to modify the display_dashboard() function to gracefully handle missing fields in the weather data?
-
-Also, the current implementation assumes a specific format for the weather data. How can I make it more robust to handle variations in the API response?
-```
-
+“Identify and handle edge cases in the weather assistant, such as invalid locations, ambiguous questions without specified location or time, missing data from the API, and unsupported weather attributes. Write code snippets to gracefully manage these cases and provide helpful user feedback.”
 ---
 
-## Final Iteration and Before/After Example
 
-### Before: Initial Data Retrieval Function
-```python
-def fetch_weather_data(location, units):
-    """Fetch weather data from API."""
-    current_weather = weather_api.get_current(location, units)
-    forecast = weather_api.get_forecast(location, units, days=5)
-    return {"current": current_weather, "forecast": forecast}
 ```
 
 ### 🗣️ Refinement Process Prompt
 ```
-The fetch_weather_data() function needs improvement. It doesn't handle errors or validate the data. How can I make it more robust to:
+Describe a step-by-step refinement process for improving the weather assistant code, including adding error handling, enhancing natural language parsing, optimizing API calls, improving user interaction, and adding data visualizations. Provide suggestions for iterative testing and code organization.”```
 
-1. Handle connection errors
-2. Validate returned data structure
-3. Handle missing or incomplete data
-4. Provide meaningful error messages to the user
-```
+### After: Improved Data Retrieval Function```
+import requests
+from requests.adapters import HTTPAdapter, Retry
 
-### After: Improved Data Retrieval Function
-```python
-def fetch_weather_data(location, units):
-    """
-    Fetch weather data from API with comprehensive error handling.
-    
-    Args:
-        location: City name or location
-        units: 'metric' or 'imperial'
-        
-    Returns:
-        Dictionary containing current weather and forecast
-        
-    Raises:
-        ConnectionError: If unable to connect to weather service
-        ValueError: If location is invalid or data is incomplete
-    """
-    try:
-        # Attempt to get current weather
-        current_weather = weather_api.get_current(location, units)
-        
-        # Validate current weather data
-        required_current_fields = ['temperature', 'condition', 'humidity', 'wind_speed']
-        missing_fields = [field for field in required_current_fields if field not in current_weather]
-        
-        if missing_fields:
-            # Handle missing fields by providing defaults
-            for field in missing_fields:
-                current_weather[field] = "N/A"
-            
-            # Log the issue but don't fail completely
-            print(f"Warning: Some current weather data is unavailable: {', '.join(missing_fields)}")
-        
-        # Attempt to get forecast with retry mechanism
-        max_retries = 3
-        retry_count = 0
-        forecast = None
-        
-        while retry_count < max_retries and forecast is None:
-            try:
-                forecast = weather_api.get_forecast(location, units, days=5)
-                break
-            except Exception as e:
-                retry_count += 1
-                if retry_count >= max_retries:
-                    print(f"Warning: Could not retrieve forecast data. Using current conditions only.")
-                    forecast = []  # Empty forecast as fallback
-                else:
-                    time.sleep(1)  # Wait before retrying
-        
-        # Ensure forecast is a list (even if empty)
-        if not isinstance(forecast, list):
-            forecast = []
-            
-        return {
-            "current": current_weather, 
-            "forecast": forecast,
-            "location": location,
-            "units": units,
-            "timestamp": time.strftime("%Y-%m-%d %H:%M")
-        }
-    
-    except ConnectionError:
-        raise ConnectionError("Failed to connect to weather service. Please check your internet connection.")
-    except ValueError as e:
-        raise ValueError(f"Invalid location: {location}. Please check spelling and try again.")
-    except Exception as e:
-        # Convert any other exceptions from the API to something we can handle
-        raise Exception(f"Error fetching weather data: {str(e)}")
-```
+class WeatherFetcher:
+    BASE_URL = "https://wttr.in/{location}?format=j1"
+
+    def __init__(self):
+        self.session = requests.Session()
+        self.session.headers.update({'User-Agent': 'Weather Advisor App'})
+
+        retries = Retry(
+            total=3,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504]
+        )
+        adapter = HTTPAdapter(max_retries=retries)
+        self.session.mount("https://", adapter)
+        self.session.mount("http://", adapter)
+
+    def get_weather(self, location: str, forecast_days: int = 5) -> Optional[dict]:
+        url = self.BASE_URL.format(location=location)
+        try:
+            response = self.session.get(url, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+            if "current_condition" not in data or "weather" not in data:
+                print("Unexpected API response structure.")
+                return None
+            return self._structure_data(data, forecast_days)
+        except requests.exceptions.RequestException as e:
+            print(f"Network error occurred: {e}")
+            return None
+        except ValueError:
+            print("Error decoding API response.")
+            return None
 
 ### Explanation
 The improved function demonstrates:
